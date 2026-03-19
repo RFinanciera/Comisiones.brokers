@@ -379,12 +379,13 @@
         }
 
         .broker-cell img {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
             object-fit: contain;
-            background: white;
-            border: 1px solid var(--border-light);
+            background: #FFFFFF;
+            border: 1.5px solid var(--border);
+            padding: 3px;
         }
 
         .broker-cell span {
@@ -660,6 +661,9 @@
         </div>
     </div>
 
+    <!-- SECTION: Planes diferenciales -->
+    <div class="section-label" style="margin-top:36px;">Brokers con planes diferenciales</div>
+
     <!-- IEB+ Section -->
     <div class="ieb-card" id="iebSection">
         <div class="ieb-header">
@@ -682,9 +686,6 @@
             </div>
         </div>
     </div>
-
-    <!-- SECTION: Planes diferenciales -->
-    <div class="section-label" style="margin-top:36px;">Otros brokers con planes diferenciales</div>
 
     <!-- IOL Plans -->
     <div style="background:linear-gradient(135deg,#6C3FEE 0%,#5028CC 100%);border-radius:var(--radius-lg);padding:28px;margin-bottom:20px;color:white;position:relative;overflow:hidden;">
@@ -1224,16 +1225,16 @@ function calculate() {
         </tr></thead><tbody>`;
 
     results.forEach((r, i) => {
-        const rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-other';
         const costClass = i === 0 ? 'cost-low' : i >= results.length - 2 ? 'cost-high' : 'cost-mid';
         const tnaSuffix = r.isTNA ? ' <span style="color:var(--accent);font-size:11px;font-weight:700;">TNA*</span>' : '';
         const rateDisplay = isFixed
             ? '$' + r.rate.toLocaleString('es-AR')
             : (r.rate * r.multiplier).toFixed(2) + '%' + (r.isTNA ? ' TNA*' : '');
         const ivaTotal = r.ivaAmount + (r.ivaDM || 0);
+        const rankDisplay = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `<span class="rank-badge rank-other">${i + 1}</span>`;
 
         html += `<tr>
-            <td><span class="rank-badge ${rankClass}">${i + 1}</span></td>
+            <td style="font-size:20px;text-align:center;">${rankDisplay}</td>
             <td><div class="broker-cell"><img src="${r.logo}" alt="${r.name}"><span>${r.name}</span></div></td>
             <td>${rateDisplay}</td>
             <td>$${formatNum(r.comisionBroker)}</td>
