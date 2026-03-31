@@ -34,6 +34,68 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* ── NAV SIMULADORES ── */
+        .sim-nav-bar {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 10px 0;
+        }
+
+        .sim-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .sim-nav-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            margin-right: 4px;
+        }
+
+        .sim-nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 13px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            background: var(--bg-primary);
+            transition: border-color 0.2s, color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .sim-nav-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .sim-nav-active {
+            border-color: var(--accent) !important;
+            color: var(--accent) !important;
+            background: var(--accent-light) !important;
+            pointer-events: none;
+        }
+
+        @media (max-width: 480px) {
+            .sim-nav-inner { gap: 6px; }
+            .sim-nav-label { width: 100%; margin-bottom: 2px; }
+            .sim-nav-link { font-size: 11px; padding: 4px 10px; }
+        }
+
         body {
             font-family: 'DM Sans', -apple-system, sans-serif;
             background: var(--bg-primary);
@@ -590,6 +652,22 @@
     </style>
 </head>
 <body>
+
+<!-- NAV SIMULADORES -->
+<div class="sim-nav-bar">
+  <div class="sim-nav-inner">
+    <span class="sim-nav-label">Más simuladores:</span>
+    <a href="https://rfinanciera.github.io/Comisiones.brokers/" class="sim-nav-link sim-nav-active">
+      💼 Comisiones Brokers
+    </a>
+    <a href="https://rfinanciera.github.io/lecap.vender.antes/" target="_blank" class="sim-nav-link">
+      📊 ¿Cuándo vender LECAPs?
+    </a>
+    <a href="https://rfinanciera.github.io/carry-trade/" target="_blank" class="sim-nav-link">
+      💱 Carry Trade
+    </a>
+  </div>
+</div>
 
 <!-- HEADER -->
 <header class="header">
