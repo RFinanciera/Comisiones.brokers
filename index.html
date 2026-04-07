@@ -34,68 +34,6 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* ── NAV SIMULADORES ── */
-        .sim-nav-bar {
-            background: #fff;
-            border-bottom: 1px solid var(--border);
-            padding: 10px 0;
-        }
-
-        .sim-nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .sim-nav-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-muted);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            white-space: nowrap;
-            margin-right: 4px;
-        }
-
-        .sim-nav-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 13px;
-            border-radius: 100px;
-            font-size: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            background: var(--bg-primary);
-            transition: border-color 0.2s, color 0.2s, background 0.2s;
-            white-space: nowrap;
-        }
-
-        .sim-nav-link:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-light);
-        }
-
-        .sim-nav-active {
-            border-color: var(--accent) !important;
-            color: var(--accent) !important;
-            background: var(--accent-light) !important;
-            pointer-events: none;
-        }
-
-        @media (max-width: 480px) {
-            .sim-nav-inner { gap: 6px; }
-            .sim-nav-label { width: 100%; margin-bottom: 2px; }
-            .sim-nav-link { font-size: 11px; padding: 4px 10px; }
-        }
-
         body {
             font-family: 'DM Sans', -apple-system, sans-serif;
             background: var(--bg-primary);
@@ -653,22 +591,6 @@
 </head>
 <body>
 
-<!-- NAV SIMULADORES -->
-<div class="sim-nav-bar">
-  <div class="sim-nav-inner">
-    <span class="sim-nav-label">Más simuladores:</span>
-    <a href="https://rfinanciera.github.io/Comisiones.brokers/" class="sim-nav-link sim-nav-active">
-      💼 Comisiones Brokers
-    </a>
-    <a href="https://rfinanciera.github.io/lecap.vender.antes/" target="_blank" class="sim-nav-link">
-      📊 ¿Cuándo vender LECAPs?
-    </a>
-    <a href="https://rfinanciera.github.io/simulador.carry.trade/" target="_blank" class="sim-nav-link">
-      💱 Carry Trade
-    </a>
-  </div>
-</div>
-
 <!-- HEADER -->
 <header class="header">
     <div class="header-inner">
@@ -722,6 +644,10 @@
             <div class="sim-input-group">
                 <label>Monto de la operación (ARS)</label>
                 <input type="text" id="montoInput" placeholder="Ej: 1.000.000" oninput="formatAndCalc(this)">
+            </div>
+            <div class="sim-input-group" id="diasGroup" style="max-width:160px;display:none;">
+                <label>Plazo (días)</label>
+                <input type="number" id="diasInput" placeholder="Ej: 7" min="1" max="365" value="7" oninput="calculate()">
             </div>
             <div class="sim-input-group" style="max-width:220px;">
                 <label>Tipo de operación</label>
@@ -849,37 +775,9 @@
 
 </main>
 
-<!-- CTA BANNER -->
-<div style="max-width:1200px;margin:0 auto;padding:0 24px 32px;">
-  <a href="https://www.youtube.com/@Revolucion.Financiera" target="_blank" style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,#14532d,#166534);border:1px solid rgba(34,197,94,0.3);border-radius:16px;padding:20px 24px;text-decoration:none;box-shadow:0 4px 20px rgba(22,101,52,0.2);">
-    <div style="display:flex;align-items:center;gap:14px;">
-      <img src="revfin_logo.png" style="width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0;">
-      <div>
-        <div style="font-size:14px;font-weight:700;color:#fff;line-height:1.3;">¿Querés más videos sobre inversiones y finanzas personales? 👇</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:3px;font-family:monospace;">www.youtube.com/@Revolucion.Financiera</div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:7px;background:#ff0000;color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:100px;white-space:nowrap;flex-shrink:0;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      Suscribite
-    </div>
-  </a>
-</div>
-
 <!-- FOOTER -->
 <footer class="footer">
-    <div style="margin-bottom:16px;">
-      <a href="https://www.youtube.com/@Revolucion.Financiera" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#ff0000;color:#fff;font-size:14px;font-weight:700;padding:12px 24px;border-radius:100px;text-decoration:none;box-shadow:0 4px 16px rgba(255,0,0,0.2);">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        Suscribite a Revolución Financiera
-      </a>
-      <a href="https://www.instagram.com/revolucionfinancieraok/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;font-size:14px;font-weight:700;padding:12px 24px;border-radius:100px;text-decoration:none;box-shadow:0 4px 16px rgba(131,58,180,0.25);margin-left:10px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-        Seguinos en Instagram
-      </a>
-    </div>
-    <p>Hecho con ❤️ por <a href="https://www.youtube.com/@Revolucion.Financiera" target="_blank">Revolución Financiera</a> · Datos actualizados a Marzo 2026</p>
-    <p style="margin-top:8px;font-size:12px;opacity:0.6;">⚠️ Este simulador es informativo. Verificá siempre las comisiones en la web oficial de cada broker.</p>
+    <p>Hecho con ❤️ por <a href="https://youtube.com/@RevolucionFinanciera" target="_blank">Revolución Financiera</a> · Datos actualizados a Marzo 2026</p>
 </footer>
 
 <script>
@@ -1054,7 +952,7 @@ const DERECHOS_MERCADO = {
     bonos_publicos: 0.01, // Públicos: 0,0100%
     bonos_privados: 0.01, // Públicos - Obligaciones Negociables: 0,0100%
     letras: 0.001,        // Letras: 0,0010%
-    caucion_colocadora: 0.045, // Administración Garantías: 0,0450%
+    caucion_colocadora: 0.18, // Administración Garantías: 0,045% cada 90 días, anualizado 0,18%
     renta: 0,
     dividendos: 0,
     suscripcion_primaria: 0,
@@ -1101,6 +999,9 @@ function selectCategory(key) {
     currentCategory = key;
     renderCategories();
     renderChart();
+    // Show/hide days input for cauciones
+    const hasTNACategory = COMISIONES[key].tnaFlags && Object.keys(COMISIONES[key].tnaFlags).length > 0;
+    document.getElementById('diasGroup').style.display = hasTNACategory ? '' : 'none';
     calculate();
 }
 
@@ -1265,6 +1166,8 @@ function calculate() {
     const area = document.getElementById('resultsArea');
     const opType = document.getElementById('opType').value;
     const cat = COMISIONES[currentCategory];
+    const diasInput = document.getElementById('diasInput');
+    const dias = parseInt(diasInput.value) || 7;
 
     if (!monto) {
         area.innerHTML = `<div class="no-data"><div class="no-data-icon">📊</div><p>Ingresá un monto para ver la comparación de comisiones</p></div>`;
@@ -1283,6 +1186,8 @@ function calculate() {
         const isBrokerTNA = cat.isTNA || (cat.tnaFlags && cat.tnaFlags[brokerId]);
         if (isBrokerTNA) hasTNA = true;
         const multiplier = (!isFixed && !isBrokerTNA && opType === 'double') ? 2 : 1;
+        // For TNA rates, prorate by days/365
+        const tnaFactor = isBrokerTNA ? (dias / 365) : 1;
 
         let comisionBroker, ivaAmount, derechosMercado, ivaDM, total;
 
@@ -1293,9 +1198,12 @@ function calculate() {
             ivaAmount = isExempt ? 0 : rate * IVA;
             total = comisionBroker + ivaAmount;
         } else {
-            const effectiveRate = rate * multiplier;
+            const effectiveRate = rate * multiplier * tnaFactor;
             comisionBroker = monto * (effectiveRate / 100);
-            derechosMercado = monto * (dmRate / 100) * ((!isFixed && !isBrokerTNA && opType === 'double') ? 2 : 1);
+            // Derechos de mercado: also prorate if TNA-based category
+            const dmFactor = (dmRate > 0 && hasTNA) ? (dias / 365) : 1;
+            const dmMultiplier = (!isFixed && !isBrokerTNA && opType === 'double') ? 2 : 1;
+            derechosMercado = monto * (dmRate / 100) * dmMultiplier * dmFactor;
             // IVA se aplica sobre comisión del broker + derechos de mercado (excepto exentos)
             ivaAmount = isExempt ? 0 : comisionBroker * IVA;
             ivaDM = isExempt ? 0 : derechosMercado * IVA;
@@ -1309,6 +1217,7 @@ function calculate() {
             rate: rate,
             isTNA: isBrokerTNA,
             multiplier,
+            tnaFactor,
             comisionBroker,
             ivaAmount,
             derechosMercado,
@@ -1332,10 +1241,15 @@ function calculate() {
 
     results.forEach((r, i) => {
         const costClass = i === 0 ? 'cost-low' : i >= results.length - 2 ? 'cost-high' : 'cost-mid';
-        const tnaSuffix = r.isTNA ? ' <span style="color:var(--accent);font-size:11px;font-weight:700;">TNA*</span>' : '';
-        const rateDisplay = isFixed
-            ? '$' + r.rate.toLocaleString('es-AR')
-            : (r.rate * r.multiplier).toFixed(2) + '%' + (r.isTNA ? ' TNA*' : '');
+        let rateDisplay;
+        if (isFixed) {
+            rateDisplay = '$' + r.rate.toLocaleString('es-AR');
+        } else if (r.isTNA) {
+            const effectivePct = (r.rate * r.tnaFactor).toFixed(4);
+            rateDisplay = r.rate.toFixed(2) + '% TNA* <span style="font-size:11px;color:var(--text-muted);">(' + effectivePct + '% en ' + dias + 'd)</span>';
+        } else {
+            rateDisplay = (r.rate * r.multiplier).toFixed(2) + '%';
+        }
         const ivaTotal = r.ivaAmount + (r.ivaDM || 0);
         const rankDisplay = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `<span class="rank-badge rank-other">${i + 1}</span>`;
 
